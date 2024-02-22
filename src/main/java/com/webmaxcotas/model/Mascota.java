@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data // contiene los getters, setters, toString, Hascode, equals
@@ -24,7 +26,12 @@ public class Mascota {
     private LocalDate fechaNacimiento;
 
     @ManyToOne
+    @JoinColumn(name = "veterinario_id")
     private Veterinario veterinario;
 
-
+    @ManyToMany
+    @JoinTable(name = "Mascota_Vacuna",
+            joinColumns = @JoinColumn(name = "mascota_id"),
+            inverseJoinColumns = @JoinColumn(name = "vacuna_id"))
+    private List<Vacuna>vacunasAplicadas = new ArrayList<>();
 }
