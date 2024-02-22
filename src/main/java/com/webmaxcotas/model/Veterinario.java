@@ -21,7 +21,7 @@ public class Veterinario {
     private String matricula;
     private String email;
 
-    @OneToMany
+    @OneToMany (mappedBy = "veterinario")
     private List<Mascota> mascotaAtendidas;
 
 }
