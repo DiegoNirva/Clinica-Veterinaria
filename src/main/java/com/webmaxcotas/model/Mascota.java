@@ -2,6 +2,7 @@ package com.webmaxcotas.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.autoconfigure.web.WebProperties;
@@ -14,6 +15,7 @@ import java.util.List;
 @Data // contiene los getters, setters, toString, Hascode, equals
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Mascota {
 
     @Id
