@@ -1,10 +1,9 @@
 package com.webmaxcotas.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
 import java.time.LocalDate;
@@ -22,13 +21,22 @@ public class Mascota {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private long id;
+
+    @NotBlank(message = "El nombre no puede estar en blanco")
     private String nombre;
+
+    @NotBlank(message = "la especie no puede estar en blanco")
     private String especie;
+
+    @NotBlank(message = "El sexo no puede estar en blanco")
     private String sexo;
+
+    @NotNull(message = "La fecha de nacimiento no puede estar en blanco")
     private LocalDate fechaNacimiento;
 
     @ManyToOne
     @JoinColumn(name = "veterinario_id")
+    @NotNull(message = "El veterinario no puede estar en blanco")
     private Veterinario veterinario;
 
     @ManyToMany
