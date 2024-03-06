@@ -16,7 +16,7 @@ public interface MascotaRepository  extends JpaRepository<Mascota, Long> {
 
 
     //query personalizada de JPQL
-    @Query(value = "SELECT m FROM Mascota m ORDER BY LOWER(m.nombres) ASC")
+    @Query("SELECT m FROM Mascota m ORDER BY LOWER(m.nombre) ASC")
     List<Mascota> findAllByOrderByNombreIgnorecaseAsc();
 
 

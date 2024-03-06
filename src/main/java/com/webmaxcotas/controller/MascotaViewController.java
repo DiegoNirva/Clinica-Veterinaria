@@ -52,7 +52,7 @@ public class MascotaViewController {
         model.addAttribute("vacunas", vacunaService.findAllByVacuna());
         model.addAttribute("mascota", new Mascota());
 
-        return "/actualizarMascota";
+        return "actualizarMascota";
     }
 
     @PostMapping("/actualizarMascota/{idMascota}")

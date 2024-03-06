@@ -28,7 +28,7 @@ public class MascotaService {
         return mascotaRepository.findById(id).orElseThrow(() ->new RuntimeException("no se encontro el veterinario"));
     }
 
-    public List<Mascota> findByMascota(){
+    public List<Mascota> findAllMascota(){
         return mascotaRepository.findAllByOrderByNombreIgnorecaseAsc();
     }
 

@@ -2,15 +2,16 @@ package com.webmaxcotas.service;
 
 import com.webmaxcotas.model.Veterinario;
 import com.webmaxcotas.repository.VeterinarioRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class VeterinarioService {
 
-    @Autowired
     private VeterinarioRepository veterinarioRepository;
 
     //insertamos las operaciones basicas para un CRUD.
