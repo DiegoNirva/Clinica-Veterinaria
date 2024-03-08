@@ -1,10 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Lista veterinarios</title>
-</head>
-<body>
-<h1>hola mundo</h1>
+<head th:insert="~{fragments/header}"></head>
+<body class="container mt-5">
+
+<h2>Lista de Veterinarios</h2>
+
+<table class="table">
+
+    <thead class="thead-dark">
+    <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Matricula</th>
+        <th>Email</th>
+        <th>Mascotas</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="veterinarios : ${veterinarios}">
+        <td th:text="${veterinarios.id}"></td>
+        <td th:text="${veterinarios.nombre}"></td>
+        <td th:text="${veterinarios.matricula}"></td>
+        <td th:text="${veterinarios.email}"></td>
+        <td>
+            <label>
+                <select disabled size ="5" style="max-height: 75px; overflow-y auto;">
+                    <option th:each="mascota : ${veterinarios.mascotaAtendidas}" th:value="${mascota.id}" th:text="${mascota.nombre}"></option>
+                </select>
+            </label>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Enlace para regresar a la lista de mascotas -->
+<a th:href="@{/mascotas}" class="btn btn-secondary">Ver Lista de Mascotas</a>
+
+<div th:replace="~{fragments/footer}"></div>
 </body>
 </html>
