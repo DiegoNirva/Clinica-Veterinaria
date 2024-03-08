@@ -18,3 +18,9 @@ INSERT INTO mascota (nombre, especie, fecha_nacimiento, sexo, veterinario_id) VA
 INSERT INTO mascota (nombre, especie, fecha_nacimiento, sexo, veterinario_id) VALUES ('Milo', 'Perro', '2023-01-10', 'Macho', 3);
 INSERT INTO mascota (nombre, especie, fecha_nacimiento, sexo, veterinario_id) VALUES ('Gala', 'Gato', '2023-01-10', 'Hembra', 3);
 INSERT INTO mascota (nombre, especie, fecha_nacimiento, sexo, veterinario_id) VALUES ('Bati', 'Perro', '2023-01-10', 'Macho', 3);
+
+-- Inserción de mascotas con vacunas
+INSERT INTO mascota_vacuna (mascota_id, vacuna_id) VALUES (3,2);
+INSERT INTO mascota_vacuna (mascota_id, vacuna_id) VALUES (1,3);
+INSERT INTO mascota_vacuna (mascota_id, vacuna_id) VALUES (2,2);
+INSERT INTO mascota_vacuna (mascota_id, vacuna_id) VALUES (2,4);
