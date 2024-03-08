@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="~{fragments/header}"></head>
+<body class="container mt-5">
+
+  <table class="table">
+
+    <thead class="thead-dark">
+      <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Especie</th>
+        <th>Sexo</th>
+        <th>Fecha de nacimiento</th>
+        <th>Atendido por Veterinario</th>
+        <th>Vacunas Aplicadas</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr th:each="mascotas : ${mascotas}">
+          <td th:text="${mascotas.id}"></td>
+          <td th:text="${mascotas.nombre}"></td>
+          <td th:text="${mascotas.especie}"></td>
+          <td th:text="${mascotas.sexo}"></td>
+          <td th:text="${mascotas.fechaNacimiento}"></td>
+          <td th:text="${mascotas.veterinario.nombre}"></td>
+          <td>
+            <ul>
+              <li th:each="vacuna : ${mascotas.vacunasAplicadas}" th:text="${vacuna.nombre}"></li>
+            </ul>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <div th:replace="~{fragments/footer}"></div>
+</body>
+
+</html>
