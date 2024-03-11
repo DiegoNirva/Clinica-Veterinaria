@@ -44,20 +44,24 @@ public class MascotaService {
 
         return mascotaRepository.save(mascota);
     }
+    public void deleteMascota(Long id){
+        mascotaRepository.deleteById(id);
+    }
 
-    public Mascota updateMascota(long idMascota, Mascota mascotaActualizada, long idVeterinario, List<Long> idVacunas){
+    public void updateMascota(long idMascota, Mascota mascotaActualizada, long idVeterinario, List<Long> idVacunas){
 
         Optional<Mascota> mascotaOptional = mascotaRepository.findById(idMascota);
 
-        Veterinario veterinarioExistente = veterinarioRepository.findById(idVeterinario).orElseThrow(()-> new RuntimeException("no se encontro el veterinario"+ idVeterinario+" al momento de guardar"));
+        Veterinario veterinario = veterinarioRepository.findById(idVeterinario).orElseThrow(()-> new RuntimeException("no se encontro el veterinario"+ idVeterinario+" al momento de guardar"));
 
         if(idVacunas != null){
             mascotaActualizada.setVacunasAplicadas(vacunaRepository.findAllById(idVacunas));
         }
 
-        mascotaActualizada = construirMascota(mascotaActualizada, mascotaOptional);
+        mascotaActualizada.setVeterinario(veterinario);
 
-        return mascotaRepository.save(mascotaActualizada);
+        Mascota mascotaExistente = construirMascota(mascotaActualizada, mascotaOptional);
+         mascotaRepository.save(mascotaExistente);
     }
 
 
@@ -69,12 +73,12 @@ public class MascotaService {
         mascotaOptional.ifPresent(mascotaExistente -> {
            mascotaBuilder
                    .id(mascotaExistente.getId())
-                   .nombre(mascotaExistente.getNombre())
-                   .especie(mascotaExistente.getEspecie())
-                   .sexo(mascotaExistente.getSexo())
-                   .fechaNacimiento(mascotaExistente.getFechaNacimiento())
-                   .veterinario(mascotaExistente.getVeterinario())
-                   .vacunasAplicadas(mascotaExistente.getVacunasAplicadas());
+                   .nombre(mascotaActualizada.getNombre())
+                   .especie(mascotaActualizada.getEspecie())
+                   .sexo(mascotaActualizada.getSexo())
+                   .fechaNacimiento(mascotaActualizada.getFechaNacimiento())
+                   .veterinario(mascotaActualizada.getVeterinario())
+                   .vacunasAplicadas(mascotaActualizada.getVacunasAplicadas());
         });
         return mascotaBuilder.build();
     }
