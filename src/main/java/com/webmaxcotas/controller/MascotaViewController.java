@@ -61,5 +61,11 @@ public class MascotaViewController {
         return "redirect:/mascotas";
     }
 
+    @PostMapping("/eliminarMascota/{id}")
+        public String deleteMascota(@PathVariable Long id){
+            mascotaService.deleteMascota(id);
+            return "redirect:/mascotas";
+        }
+
 
 }
