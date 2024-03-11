@@ -77,4 +77,58 @@ public class MascotaTest {
         assertFalse(mascotaGuardado.getVacunasAplicadas().isEmpty());
     }
 
+    @Test
+    void findAllMascota(){
+        List<Mascota> mascotas = mascotaService.findAllMascota();
+
+        assertFalse(mascotas.isEmpty());
+    }
+    @Test
+    void findMascotaById(){
+        Long idMascota = 1l;
+        Mascota mascota = mascotaService.findByIdMascota(idMascota);
+
+        assertNotNull(mascota);
+        assertEquals(idMascota, mascota.getId());
+
+    }
+    @Test
+    void testActualizarMascotaSinVacunas() {
+        Long mascotaId = 2l;
+
+        Mascota mascotaActualizada = new Mascota();
+        mascotaActualizada.setNombre("firulais");
+        mascotaActualizada.setEspecie("perro");
+        mascotaActualizada.setSexo("macho");
+        mascotaActualizada.setFechaNacimiento(LocalDate.now());
+        mascotaActualizada.setVeterinario(veterinarioGuardado);
+
+        mascotaService.updateMascota(mascotaId, mascotaActualizada, veterinarioGuardado.getId() ,null);
+
+        Mascota mascotaDespuesDeActualizar = mascotaService.findByIdMascota(mascotaId);
+
+        assertEquals(mascotaActualizada.getNombre(), mascotaDespuesDeActualizar.getNombre());
+        assertEquals(mascotaActualizada.getEspecie(), mascotaDespuesDeActualizar.getEspecie());
+        assertEquals(mascotaActualizada.getVeterinario().getId(), mascotaDespuesDeActualizar.getVeterinario().getId());
+    }
+
+    @Test
+    void deleteMascota(){
+        Long idMascota = 1l;
+
+        //buscamos si la mascota existe
+        assertNotNull(mascotaService.findByIdMascota(idMascota));
+        mascotaService.deleteMascota(idMascota);
+
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            mascotaService.findByIdMascota(idMascota);
+        });
+
+        String expectedMessage = "No se encontró la mascota: " + idMascota;
+        String actualMessage = exception.getMessage();
+
+        //Corroboramos que efectivamente fue eliminada
+        assertFalse(actualMessage.contains(expectedMessage));
+    }
+
 }
