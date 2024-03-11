@@ -33,7 +33,7 @@ public class VacunaViewController {
     @PostMapping("/guardarVacuna")
         public String saveVacuna(@ModelAttribute Vacuna vacuna){
         vacunaService.saveVacuna(vacuna);
-        return ("redirect:/vacunas");
+        return "redirect:/vacunas";
     }
 
 
