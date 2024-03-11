@@ -31,12 +31,12 @@ public class MascotaViewController {
         return "mascotas";
     }
 
-    @GetMapping("/agregarMascotas")
+    @GetMapping("/agregarMascota")
     public String showTheFormMascotas(Model model){
-        model.addAttribute("veterinario", veterinarioService.findAllVeterinario());
+        model.addAttribute("veterinarios", veterinarioService.findAllVeterinario());
         model.addAttribute("vacunas", vacunaService.findAllByVacuna());
         model.addAttribute("mascota", new Mascota());
-        return "agregarMascotas";
+        return "agregarMascota";
     }
 
     @PostMapping("guardarMascota")

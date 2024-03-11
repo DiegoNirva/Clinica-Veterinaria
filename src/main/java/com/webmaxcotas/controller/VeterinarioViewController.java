@@ -3,7 +3,6 @@ package com.webmaxcotas.controller;
 import com.webmaxcotas.model.Veterinario;
 import com.webmaxcotas.service.VeterinarioService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +17,7 @@ public class VeterinarioViewController {
 
     private final VeterinarioService veterinarioService;
 
-    @GetMapping("/veterinario")
+    @GetMapping("/veterinarios")
     public String findAllVeterinario(Model model){
         List<Veterinario> veterinarios =veterinarioService.findAllVeterinario();
         model.addAttribute("veterinarios", veterinarios);
