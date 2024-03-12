@@ -48,15 +48,15 @@ public class MascotaViewController {
     @GetMapping("/actualizarMascota/{id}")
     public String showTheFormUpdateMascota(@PathVariable Long id, Model model){
         Mascota mascota = mascotaService.findByIdMascota(id);
-        model.addAttribute("veterinario", veterinarioService.findAllVeterinario());
+        model.addAttribute("mascota", mascota);
+        model.addAttribute("veterinarios", veterinarioService.findAllVeterinario());
         model.addAttribute("vacunas", vacunaService.findAllByVacuna());
-        model.addAttribute("mascota", new Mascota());
 
         return "actualizarMascota";
     }
 
     @PostMapping("/actualizarMascota/{idMascota}")
-    public String updateMascota(@RequestParam Long idMascota, @ModelAttribute Mascota mascotaActualizada, @RequestParam Long idVeterinario, @RequestParam(required = false) List<Long> idVacunas){
+    public String updateMascota(@PathVariable Long idMascota, @ModelAttribute Mascota mascotaActualizada, @RequestParam Long idVeterinario, @RequestParam(required = false) List<Long> idVacunas){
         mascotaService.updateMascota(idMascota, mascotaActualizada, idVeterinario, idVacunas);
         return "redirect:/mascotas";
     }
