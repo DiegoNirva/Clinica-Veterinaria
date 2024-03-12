@@ -1,9 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:insert="~{fragments/header}"></head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <body class="container mt-5">
 
-  <table class="table">
+  <!-- Agregamos botones para agregar dueños y mascotas -->
+  <div class="mb-3">
+    <a th:href="@{/agregarVeterinario}" class="btn btn-primary">Agregar Veterinario</a>
+    <a th:href="@{/agregarVacuna}" class="btn btn-primary">Agregar Vacunas</a>
+    <a th:href="@{/agregarMascota}" class="btn btn-primary">Agregar Mascota</a>
+  </div>
+
+<table class="table">
 
     <thead class="thead-dark">
       <tr>
@@ -29,9 +37,33 @@
               <li th:each="vacuna : ${mascotas.vacunasAplicadas}" th:text="${vacuna.nombre}"></li>
             </ul>
           </td>
+          <!-- Botones de eliminar y actualizar mascota -->
+          <td>
+            <button th:onclick="'eliminarMascotaConfirmation(\'' + ${mascotas.id} + '\');'" class="btn btn-danger">Eliminar</button>
+            <a th:href="@{/actualizarMascota/{id}(id=${mascotas.id})}" class="btn btn-warning">Actualizar</a>
+          </td>
         </tr>
     </tbody>
   </table>
+
+  <script th:inline="javascript">
+
+    function eliminarMascotaConfirmation(id) {
+        Swal.fire({
+            title: '¿Desea eliminar la mascota seleccionada?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                location.href = '/maxcotas/eliminarMascota/' + id;
+            }
+        });
+    }
+  </script>
 
   <div th:replace="~{fragments/footer}"></div>
 </body>
