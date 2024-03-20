@@ -16,7 +16,7 @@ public class Usuario {
     @Column(name="id", nullable = false)
     private Long id;
 
-    private String userName;
+    private String username;
     private String contrasenia;
     private String rol;
     private String nombre;

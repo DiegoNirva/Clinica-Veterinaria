@@ -3,6 +3,7 @@ package com.webmaxcotas.service;
 import com.webmaxcotas.model.Usuario;
 import com.webmaxcotas.repository.UsuarioRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,22 +16,22 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
-public class CustomUserDetailService  implements UserDetailsService {
 
-    private final UsuarioRepository usuarioRepository;
+public class CustomUserDetailService  implements UserDetailsService {
+    @Autowired
+    private  UsuarioRepository usuarioRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Usuario usuario = usuarioRepository.findByUserName(username);
+        Usuario usuario = usuarioRepository.findByUsername(username);
 
         //se verifica si el usuario existe
         if(usuario == null){
             throw new UsernameNotFoundException("Usuario no encontrado: ".concat(username));
         }
 
-        return User.withUsername(usuario.getUserName())
+        return User.withUsername(usuario.getUsername())
                 .password(usuario.getContrasenia())
                 .authorities(List.of(new SimpleGrantedAuthority(usuario.getRol())))
                 .build();

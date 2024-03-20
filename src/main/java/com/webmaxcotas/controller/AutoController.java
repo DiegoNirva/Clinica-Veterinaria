@@ -37,4 +37,10 @@ public class AutoController {
         return "redirect:/login";
     }
 
+    @GetMapping("/gestorRoles")
+    public String viewRoles(Model model){
+        model.addAttribute("usuario", customUserDetailService.findAllUsuario());
+        return "redirect:/roles";
+    }
+
 }
