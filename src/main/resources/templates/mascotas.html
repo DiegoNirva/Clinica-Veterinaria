@@ -13,6 +13,12 @@
 
 <table class="table">
 
+  USUARIO AUTENTICADO:
+  <div sec:authentication ="principal.username"></div>
+  <br>
+  <div sec:authentication ="principal.authorities"></div>
+  <br>
+
     <thead class="thead-dark">
       <tr>
         <th>Id</th>
@@ -22,6 +28,7 @@
         <th>Fecha de nacimiento</th>
         <th>Atendido por Veterinario</th>
         <th>Vacunas Aplicadas</th>
+        <th sec:authorize="hasAuthority('ROL_ADMIN')">Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -38,7 +45,7 @@
             </ul>
           </td>
           <!-- Botones de eliminar y actualizar mascota -->
-          <td>
+          <td sec:authorize="hasAuthority('ROL_ADMIN')">
             <button th:onclick="'eliminarMascotaConfirmation(\'' + ${mascotas.id} + '\');'" class="btn btn-danger">Eliminar</button>
             <a th:href="@{/actualizarMascota/{id}(id=${mascotas.id})}" class="btn btn-warning">Actualizar</a>
           </td>
