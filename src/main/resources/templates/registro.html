@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head th:insert="~{fragments/headerNoLogin}"></head>
 <body class="container mt-5">
 
@@ -11,7 +11,7 @@
             <form th:action="@{/registro}" method="post" th:object="${usuario}" class="mb-4">
                 <div class="form-group">
                     <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" th:field="*{username}" class="form-control" required/>
+                    <input type="text" id="username" name="username" th:field="*{userName}" class="form-control" required/>
                 </div>
 
                 <div class="form-group">
@@ -26,7 +26,7 @@
 
                 <div class="form-group">
                     <label for="contrasena">Contraseña:</label>
-                    <input type="password" id="contrasena" name="contrasena" th:field="*{contrasena}" class="form-control" required/>
+                    <input type="password" id="contrasena" name="contrasena" th:field="*{contrasenia}" class="form-control" required/>
                 </div>
 
                 <br>
