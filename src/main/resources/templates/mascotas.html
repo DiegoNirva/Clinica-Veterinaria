@@ -9,14 +9,15 @@
     <a th:href="@{/agregarVeterinario}" class="btn btn-primary">Agregar Veterinario</a>
     <a th:href="@{/agregarVacuna}" class="btn btn-primary">Agregar Vacunas</a>
     <a th:href="@{/agregarMascota}" class="btn btn-primary">Agregar Mascota</a>
+    <a sec:authorize="hasAuthority('ROL_ADMIN')" th:href="@{/gestorRoles}" class="btn btn-primary">Gestor de Roles</a>
   </div>
 
-<table class="table">
+<table class="table" >
 
-  USUARIO AUTENTICADO:
-  <div sec:authentication ="principal.username"></div>
+  <b>USUARIO AUTENTICADO:</b>
+  <div sec:authentication ="principal.username" class="texto-negrita"></div>
   <br>
-  <div sec:authentication ="principal.authorities"></div>
+  <div sec:authentication ="principal.authorities" class="texto-negrita"></div>
   <br>
 
     <thead class="thead-dark">
