@@ -39,10 +39,12 @@ public class CustomUserDetailService  implements UserDetailsService {
 
     public Usuario saveUsuario(Usuario usuario){
             usuario.setContrasenia(passwordEncoder().encode(usuario.getContrasenia()));
-            usuario.setRol("ROL_LECTURA");
             return usuarioRepository.save(usuario);
     }
 
+    public Usuario findByIdUsuario(Long idUsuario){
+        return usuarioRepository.findById(idUsuario).orElseThrow(()-> new RuntimeException("No se encontro el usuario"+idUsuario));
+    }
     public Usuario upDateUsuario(Long idUsuario, String nuevoRol){
 
         Usuario usuario = findByIdUsuario(idUsuario);
@@ -63,9 +65,7 @@ public class CustomUserDetailService  implements UserDetailsService {
         return usuarioRepository.findAll();
     }
 
-    public Usuario findByIdUsuario(Long idUsuario){
-        return usuarioRepository.findById(idUsuario).orElseThrow(()-> new RuntimeException("No se encontro el usuario"+idUsuario));
-    }
+
 
     public PasswordEncoder passwordEncoder(){
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();

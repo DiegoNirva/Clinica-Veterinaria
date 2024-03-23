@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AndRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -22,6 +23,7 @@ public class SecurityConfiguration  {
         http.userDetailsService(userDetailsService)
                 .authorizeHttpRequests((requests) -> requests
                 .requestMatchers("/", "registro").permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/gestorRoles")).hasAuthority("ROL_ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer
