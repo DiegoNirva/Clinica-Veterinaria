@@ -39,3 +39,9 @@ El endpoint principal de la aplicación se encuentra en:
 `/veterinaria/mascotas`
 
 Muchas gracias!
+
+
+# Diagramas.
+![DB diagrama](https://i.ibb.co/Lphrkc3/Diagrama-DB.png)
+
+
